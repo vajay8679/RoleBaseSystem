@@ -10,9 +10,9 @@
                 <li id="full-view"><i class="ti-fullscreen"></i></li>
                 <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                 <li class="dropdown">
-                    <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
+                    <!-- <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
                         <span>2</span>
-                    </i>
+                    </i> -->
                     <div class="dropdown-menu bell-notify-box notify-box">
                         <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
                         <div class="nofity-list">
