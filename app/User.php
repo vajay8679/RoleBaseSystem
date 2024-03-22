@@ -6,19 +6,33 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, LogsActivity;
 
+
+    /**
+     * Get the options for the Spatie Activitylog
+     *
+     * @return \Spatie\Activitylog\LogOptions
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        $logOptions = new LogOptions();
+        // Configure the log options as needed
+        return $logOptions;
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','session_id'
+        'name', 'email', 'password', 'session_id'
     ];
 
     /**
@@ -38,6 +52,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public static function getpermissionGroups()
     {

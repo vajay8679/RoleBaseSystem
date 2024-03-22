@@ -7,11 +7,26 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 
 class Admin extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, LogsActivity;
 
+
+     /**
+     * Get the options for the Spatie Activitylog
+     *
+     * @return \Spatie\Activitylog\LogOptions
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        $logOptions = new LogOptions();
+        // Configure the log options as needed
+        return $logOptions;
+    }
     /**
      * Set the default guard for this model.
      *

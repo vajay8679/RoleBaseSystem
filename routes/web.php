@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Spatie\Activitylog\Contracts\Activity;
 
 /*
 /*
@@ -15,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+
+    return Activity::all();
+    return view('welcome');
+});
 
 Auth::routes();
 
@@ -28,6 +31,8 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Admin routes
  */
 Route::group(['prefix' => 'admin', 'middleware' => 'concurrent'], function () {
+    
+    
     Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
     Route::resource('roles', 'Backend\RolesController', ['names' => 'admin.roles']);
     Route::resource('users', 'Backend\UsersController', ['names' => 'admin.users']);
