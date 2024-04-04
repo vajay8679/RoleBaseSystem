@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Activitylog\Contracts\Activity;
+use App\Http\Controllers\Backend\AdminsController; // Import the AdminsController if it's not in the same namespace
 
 /*
 /*
@@ -31,13 +32,14 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Admin routes
  */
 Route::group(['prefix' => 'admin', 'middleware' => 'concurrent'], function () {
-    
-    
+
+
     Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
     Route::resource('roles', 'Backend\RolesController', ['names' => 'admin.roles']);
     Route::resource('users', 'Backend\UsersController', ['names' => 'admin.users']);
     Route::resource('admins', 'Backend\AdminsController', ['names' => 'admin.admins']);
 
+    Route::get('activitylog', [AdminsController::class, 'activityLog'])->name('activitylog');
 
     // Login Routes
     Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class AdminsController extends Controller
 {
@@ -20,6 +21,22 @@ class AdminsController extends Controller
             return $next($request);
         });
     }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activityLog()
+    {
+        $activityLogs = DB::table('activity_log')->get();
+
+        // die('hello');
+       
+        return view('backend.pages.admins.log', compact('activityLogs'));
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -150,7 +167,7 @@ class AdminsController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->username = $request->username;
-        
+
         if ($request->password) {
             $admin->password = Hash::make($request->password);
         }
